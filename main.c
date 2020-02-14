@@ -1,3 +1,21 @@
+/*
+ * Copyright (C) 2020 kaz Kojima
+ *
+ * This file is part of fanctrl program.  This program is free
+ * software; you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the
+ * Free Software Foundation; either version 3, or (at your option)
+ * any later version.
+
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program;
+ */
+
 #include <libopencm3/cm3/nvic.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/rcc.h>
@@ -221,12 +239,10 @@ int main(void)
     ambient = convert_ambient(adc_read_regular(ADC1));
     temperature = stts75_read_temperature(I2C2, STTS75_SENSOR0);
     pwm_set((temperature - ambient) >> 4);
-    my_usart_print_string(USART2, "ambient:");
+    my_usart_print_string(USART2, "[2;4H[32m[Kambient:");
     my_usart_print_uint16(USART2, ambient);
-    my_usart_print_string(USART2, "\r\n");
-    my_usart_print_string(USART2, "tpm1075:");
+    my_usart_print_string(USART2, "[4;4H[33m[Ktpm1075:");
     my_usart_print_uint16(USART2, temperature);
-    my_usart_print_string(USART2, "\r\n");
     for (int i = 0; i < 20; i++)
       delay_us(50000);
   }

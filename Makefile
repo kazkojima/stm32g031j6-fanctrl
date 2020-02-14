@@ -1,4 +1,4 @@
-PROJECT = blinker
+PROJECT = fanctrl
 BUILD_DIR = bin-$(BOARD)
 
 CFILES = main.c
